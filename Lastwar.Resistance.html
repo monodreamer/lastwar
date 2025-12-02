@@ -7,7 +7,7 @@
 	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 	<meta http-equiv="Pragma" content="no-cache">
 	<meta http-equiv="Expires" content="0">
-	<title>라스트 워 내성 검색기</title>
+	<title>라스트 워: 내성 검색기</title>
 	<style>
 		body {
 			font-family: Arial, sans-serif;
@@ -17,10 +17,20 @@
 			align-items: center;
 			height: 100vh;
 			margin: 0;
-		}
 
+			background: url('./images/lastwar_bg.jpg') no-repeat center center fixed;
+			background-size: cover;
+			position: relative;
+		}
+		body::before {
+			content: "";
+			position: fixed;
+			top: 0; left: 0; right: 0; bottom: 0;
+			background-color: rgba(0,0,0,0.4); /* 검은색 반투명 오버레이 */
+			z-index: -1; /* 내용보다 뒤에 */
+		}
 		.container {
-			background-color: white;
+			background-color: rgba(255, 255, 255, 0.8);
 			padding: 20px;
 			border-radius: 10px;
 			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -33,6 +43,7 @@
 			font-size: 1.6em;
 			color: #222;
 			margin-bottom: 20px;
+			display: inline-block;
 		}
 
 		.input-group {
@@ -205,6 +216,42 @@
 			border-bottom: 6px solid transparent;
 			border-right: 8px solid #1f2937;
 		}
+
+		/* 팝업 전체 화면 덮기 */
+		.popup {
+			display: none; /* 기본은 숨김 */
+			position: fixed;
+			top: 0; left: 0; right: 0; bottom: 0;
+			background: rgba(0,0,0,0.6); /* 반투명 배경 */
+			justify-content: center;
+			align-items: center;
+			z-index: 999;
+		}
+
+		/* 팝업 안의 이미지 */
+		.popup img {
+			background: white;          /* 흰색 테두리 */
+			padding: 16px;              /* 테두리 두께 */
+			border: 0px solid #ddd;     /* 얇은 회색 라인 */
+			border-radius: 0px;         /* 모서리 둥글게 */
+			max-width: 450px;             /* 화면에 맞게 축소 */
+			max-height: auto;
+			box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+			cursor: pointer;            /* 클릭 가능 표시 */
+		}
+
+		/* 버튼 스타일 */
+		.open-btn {
+			padding: 6px 12px;
+			font-size: 12px;
+			background-color: #3ba03b;
+			color: white;
+			border: none;
+			border-radius: 8px;
+			cursor: pointer;
+			margin-left: 15px;
+		}
+
 	</style>
 </head>
 
@@ -213,8 +260,14 @@
 		<span class="arrow" aria-hidden="true"></span>
 		<span>BACK</span>
 	</a>
+
+	<div class="popup" id="popup" onclick="closePopup()">
+		<img src="./images/lastwar_tip.png">
+	</div>
+
 	<div class="container">
 		<h1>적정 내성 구간 검색</h1>
+		<button class="open-btn" onclick="openPopup()">Tip!</button>
 		<div class="input-group">
 			<div class="input-row">
 				<!-- 첫 번째 입력 그룹 -->
@@ -230,16 +283,16 @@
 				</div>
 
 				<!--
-		<div class="sub-input">
-		  <label for="myPower" id="myPowerLabel">내 전투력</label>
-		  <input type="number" id="myPower" placeholder="내 전투력 입력" min="0" value="10000000" step="100000">
-		</div>
+				<div class="sub-input">
+					<label for="myPower" id="myPowerLabel">내 전투력</label>
+					<input type="number" id="myPower" placeholder="내 전투력 입력" min="0" value="10000000" step="100000">
+				</div>
 
-		<div class="step-buttons">
-		  <button type="button" onclick="stepUp(2)">▲</button>
-		  <button type="button" onclick="stepDown(2)">▼</button>
-		</div>
-		-->
+				<div class="step-buttons">
+					<button type="button" onclick="stepUp(2)">▲</button>
+					<button type="button" onclick="stepDown(2)">▼</button>
+				</div>
+				-->
 				<div class="sub-input slide">
 					<label for="myPower" id="myPowerLabel">내 부대 전투력</label>
 					<input type="range" id="myPower" min="0" max="100000000" step="100000" value="10000000">
@@ -371,6 +424,14 @@
 			if (localStorage.getItem('myPower'))
 				myPowerInput.value = localStorage.getItem('myPower');
 		}
+
+		function openPopup() {
+			document.getElementById('popup').style.display = 'flex';
+		}
+		function closePopup() {
+			document.getElementById('popup').style.display = 'none';
+		}
+
 	</script>
 
 </body>

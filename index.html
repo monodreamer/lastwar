@@ -1,26 +1,52 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>내성 계산기</title>
+  <title>라스트 워</title>
   <style>
     body {
       display: flex;
-      justify-content: center;   /* 가로 중앙 */
-      align-items: center;       /* 세로 중앙 */
-      height: 100vh;             /* 화면 전체 높이 */
+      flex-direction: column;
+      /* 위에서 아래로 배치 */
+      justify-content: center;
+      /* 세로 중앙 정렬 */
+      align-items: center;
+      /* 가로 중앙 정렬 */
+      height: 100vh;
       margin: 0;
-      background-color: #f9f9f9;
+
+      background: url('./images/lastwar_bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
     }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0,0,0,0.4); /* 검은색 반투명 오버레이 */
+      z-index: -1; /* 내용보다 뒤에 */
+    }
+
+    .logo {
+      margin-top: 0px;
+      /* 화면 상단에서 조금 내려오게 */
+      max-width: 200px;
+      /* 로고 크기 제한 (원하는 크기로 조정 가능) */
+    }
+
     .button-container {
       width: 250px;
       display: flex;
-      flex-direction: column;    /* 버튼들을 세로로 쌓기 */
-      gap: 20px;                 /* 버튼 사이 간격 */
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 60px;
+      /* 로고와 버튼 사이 간격 */
     }
+
     button {
       font-size: 1.5rem;
       padding: 1rem 2rem;
@@ -30,11 +56,14 @@
     }
   </style>
 </head>
+
 <body>
+  <img class="logo" src="./images/lastwar_logo.png">
   <div class="button-container">
     <button onclick="location.href='./Lastwar.Resistance.html'">내성 계산기</button>
     <!-- 나중에 버튼을 추가하면 아래처럼 계속 붙이면 됩니다 -->
     <!-- <button onclick="location.href='./other.html'">다른 기능</button> -->
   </div>
 </body>
+
 </html>
