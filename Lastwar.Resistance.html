@@ -10,7 +10,7 @@
 	<title>라스트 워: 내성 검색기</title>
 	<style>
 		body {
-			font-family: Arial, sans-serif;
+			font-family: Arial, Verdana, Tahoma, Georgia, sans-serif;
 			background-color: #f4f4f4;
 			display: flex;
 			justify-content: center;
@@ -30,6 +30,7 @@
 			z-index: -1; /* 내용보다 뒤에 */
 		}
 		.container {
+			display: block;
 			background-color: rgba(255, 255, 255, 0.8);
 			padding: 20px;
 			border-radius: 10px;
@@ -252,6 +253,17 @@
 			margin-left: 15px;
 		}
 
+		.copyright {
+			font-family: Verdana, Geneva, Tahoma, sans-serif;
+			font-size: 10px;
+			color: #fff;
+			text-align: right;
+			padding: 8px;
+			position: fixed;     /* 화면에 고정 */
+			bottom: 10px;        /* 화면 아래에서 10px 위 */
+			right: 10px;         /* 화면 오른쪽에서 10px 왼쪽 */
+		}
+
 	</style>
 </head>
 
@@ -305,7 +317,9 @@
 
 		<div id="results-container"></div>
 	</div>
+	<div class="copyright">&copy; 2025 #1733 WRUX / ROKsoldier</div>
 
+	
 	<script>
 		const opponentResistanceInput = document.getElementById('opponentResistance');
 		const myPowerInput = document.getElementById('myPower');
