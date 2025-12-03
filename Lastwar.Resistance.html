@@ -8,7 +8,7 @@
 	<meta http-equiv="Pragma" content="no-cache">
 	<meta http-equiv="Expires" content="0">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-	<title>LAST WAR : 적정 내성 검색기</title>
+	<title>LAST WAR : 바이러스 내성 계산기</title>
 	<style>
 		body {
 			font-family: Arial, Verdana, Tahoma, Georgia, sans-serif;
@@ -19,7 +19,7 @@
 			height: 100vh;
 			margin: 0;
 
-			background: url('./images/lastwar_bg.jpg') no-repeat center center fixed;
+			background: url('./images/lastwar_bg2.jpg') no-repeat center center fixed;
 			background-size: cover;
 			position: relative;
 		}
@@ -27,7 +27,7 @@
 			content: "";
 			position: fixed;
 			top: 0; left: 0; right: 0; bottom: 0;
-			background-color: rgba(0,0,0,0.4); /* 검은색 반투명 오버레이 */
+			background-color: rgba(0,0,0,0.5); /* 검은색 반투명 오버레이 */
 			z-index: -1; /* 내용보다 뒤에 */
 		}
 		.container {
@@ -159,17 +159,17 @@
 			min-height: 100px;
 			max-height: 65vh;          /* 화면(viewport) 높이의 80% */
 			overflow-y: auto;      /* 내용이 넘칠 경우 자동으로 수직 스크롤바 표시 */
-			border: 1px solid #ccc; /* 확인용 테두리 */
-			padding: 5px;
+			padding: 1px;
 			scrollbar-width: none;     /* 기본 숨김 */
+			cursor: default;
 		}
 
 		#results-container > .result-item:first-child {
 			border-top: 1px solid #000;     /* 위쪽 선 */
   			border-bottom: 1px solid #000;  /* 아래쪽 선 */
-			background-color: #a4a4a4;
+			/*background-color: #a4a4a4;*/
 			font-weight: bold;
-			color: white;
+			color: black;
 		}
 
 		.result-item {
@@ -280,7 +280,7 @@
 			color: white;
 			border: none;
 			border-radius: 8px;
-			cursor: pointer;
+			cursor: help;
 			margin-left: 15px;
 		}
 
@@ -299,27 +299,22 @@
 			scrollbar-width: thin; 
 			scrollbar-color: #aaf transparent; /* thumb / track 색상 */
 		}
-
 		/* 크롬/엣지/사파리용 */
 		#results-container::-webkit-scrollbar {
 			width: 0px; /* 기본 숨김 */
 			background: transparent;
 		}
-
 		#results-container:hover::-webkit-scrollbar {
 			width: 8px; /* hover 시 나타남 */
 		}
-
 		#results-container:hover::-webkit-scrollbar-track {
 			background: transparent; /* 트랙은 투명하게 */
 		}
-
 		#results-container:hover::-webkit-scrollbar-thumb {
 			background: rgba(0,0,255,0.3); /* 은은한 회색 */
 			border-radius: 4px;          /* 둥근 모서리 */
 			transition: background 0.3s ease; /* 부드러운 색상 변화 */
 		}
-
 		#results-container:hover::-webkit-scrollbar-thumb:hover {
 			background: rgba(0,0,255,0.5); /* hover 시 조금 더 진하게 */
 		}
@@ -338,7 +333,7 @@
 	</div>
 
 	<div class="container">
-		<h1>적정 내성 검색</h1>
+		<h1>바이러스 내성 차이에 따른 전투력</h1>
 		<button class="open-btn" onclick="openPopup()"><i class="fa-solid fa-circle-check"></i> Tip</button>
 		<div class="input-group">
 			<div class="input-row">
@@ -455,7 +450,7 @@
 			const MAX_PERCENT = 100.0;
 			const power = myPowerInput.value;
 			let found = false;
-			let myRes = 0;
+			let myRes = 250 * (Math.floor(requiredRes/2/250)-1);
 
 			function createItem(html) {
 				const item = document.createElement('div');
@@ -484,7 +479,7 @@
 			if (!found) {
 				resultsContainer.innerHTML = '<div class="result-item">해당 구간에 맞는 내성(250 배수)이 없습니다.</div>';
 			} else {
-				resultsContainer.insertBefore(createItem(`<span class="head">내성</span><span class="head">실제 적용 전투력</span><span class="head">감소율</span>`), resultsContainer.children[0]);
+				resultsContainer.insertBefore(createItem(`<span class="head">나의 내성</span><span class="head">감소율 적용 전투력</span><span class="head">데미지 감소율</span>`), resultsContainer.children[0]);
 			}
 			save();
 		}
